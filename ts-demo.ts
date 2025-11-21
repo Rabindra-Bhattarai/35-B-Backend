@@ -93,4 +93,136 @@ let student1: Student = {
 console.log(student1);
 
 
+//Generic
+function identity <T> (arg:T)  :T {
+    return arg;
+}
 
+//DataType injected at call time
+let output1 = identity<string>("myString");
+console.log(output1);
+let output2 = identity<number>(100);
+console.log(output2);
+
+
+
+//enum 
+//named constant
+enum Role {
+    Admin,
+    User,
+    Guest
+}
+
+let userrole:Role = Role.Admin;
+console.log(userrole);
+console.log(userrole==Role.Admin); // constant check
+
+
+let userRoleName: string = "admin";
+console.log(userRoleName == "Admin"); //case sensitive check
+
+
+    
+//generic usecase
+interface user{
+    id: number;
+    name: string;
+    role: Role;
+}
+
+let optUser: Partial<user> = {
+    name:"Dave"
+};
+
+//every attribute is optional
+console.log(optUser);
+let readonlyUser: Readonly<user> = {
+    id:1,
+    name:"Eve",
+    role: Role.User
+};
+//readonlyUser.id = 2; //Error
+console.log(readonlyUser);
+
+
+
+
+
+
+
+
+
+
+
+
+//Task
+
+//create enum for carType: sedan. SUV, Truck, Coupe.
+enum CarType {
+    Sedan,
+    SUV,
+    Truck,
+    Coupe
+}
+
+//Create a type carModel
+type CarModel = {
+    id: number;
+    name: string;
+    type: CarType;
+    description?: string;
+}
+
+//create an interface for a car with properties:
+//make string or number, mode: carModel,
+//year:number
+//type:carTpe, and isElectric(optional) bpplean or number or string
+interface Car {
+    make: string | number;
+    model: CarModel;
+    year: number;
+    type: CarType;
+    isElectric?: boolean | number | string;
+}
+
+//create a array of cars with ar least 3 car objects.
+let cars: Car[] = [
+    {
+        make: "Toyota",
+        model: {
+            id: 1,
+            name: "Camry",
+            type: CarType.Sedan
+        },
+        year: 2020,
+        type: CarType.Sedan,
+        isElectric: false
+    },
+    {
+        make: "Ford",
+        model: {
+            id: 2,
+            name: "Explorer",
+            type: CarType.SUV
+        },
+        year: 2021,
+        type: CarType.SUV,
+        isElectric: "No"
+    },
+    {
+        make: "Tesla",
+        model: {
+            id: 3,
+            name: "Model S",
+            type: CarType.Sedan
+        },
+        year: 2022,
+        type: CarType.Sedan,
+        isElectric: true
+    }
+];
+
+//filter the cars whose year is greater that 2015
+let recentCars = cars.filter(car => car.year > 2015);
+console.log(recentCars);
