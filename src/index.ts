@@ -8,15 +8,17 @@ import { connectDatabase } from './database/mongodb';
 //  //can  use.env variable below this
 //  console.log(process.env.PORT);
 
-
 import bookRoutes from './routes/book.route';
 import { PORT } from './config';
+import authRoutes from './routes/auth.routes';
 
 const app: Application = express();
 // const PORT: number = 3000;
 
 app.use(bodyParser.json());
 
+
+app.use('api/auth', authRoutes);
 app.get('/', (req: Request, res: Response)  => {
     res.send('Hello, World!');
 });
