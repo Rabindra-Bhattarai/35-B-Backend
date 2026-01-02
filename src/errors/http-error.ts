@@ -1,11 +1,10 @@
-export class HttpError extends Error{
-    statusCode: number;
+import { } from "express";
 
-    constructor(statusCode: number, message: string){
+
+export class HttpError extends Error {
+    statusCode: number
+    constructor(statusCode: number, message: string) {
         super(message);
-        this.statusCode= statusCode;
+        this.statusCode = statusCode;
     }
-
 }
-
-//custom error to handle errors with status code
